@@ -50,7 +50,7 @@ const ProfileCard = () => {
     return (
       <div className="profile-success-container">
         <img src={profileImageUrl} alt="profile" className="profile-img" />
-        <h1 className="profile-heading">Anitha</h1>
+        <h1 className="profile-heading">Sriyan</h1>
         <p className="profile-bio">{shortBio}</p>
       </div>
     )
