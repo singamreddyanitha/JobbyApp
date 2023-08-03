@@ -6,45 +6,46 @@ import "./index.css"
 
 const FiltersGroup = props => {
     
-    const onChangeSearchInput = event => {
-        const {changeSearchInput} = props 
-        changeSearchInput(event);
-    }
+    // const onChangeSearchInput = event => {
+    //     const {changeSearchInput} = props 
+    //     changeSearchInput(event);
+    // }
 
-    const onEnterSearchInput = event => {
-        const {getJobs} = props 
-        if(event.key === "Enter") {
-            getJobs();
-        }
-    }
+    // const onEnterSearchInput = event => {
+    //     const {getJobs} = props 
+    //     if(event.key === "Enter") {
+    //         getJobs();
+    //     }
+    // }
 
-    const renderSearchInput = () => {
-        const {getJobs, searchInput} = props 
+    // const renderSearchInput = () => {
+    //     const {getJobs, searchInput} = props 
 
-        return (
-            <div className="search-input-container">
-        <input
-          type="search"
-          className="search-input"
-          placeholder="Search"
-          value={searchInput}
-          onChange={onChangeSearchInput}
-          onKeyDown={onEnterSearchInput}
-        />
-        <button
-          type="button"
-          id="searchButton"
-          className="search-button-container"
-          onClick={getJobs}
-        >
-          <BsSearch className="search-icon" />
-        </button>
-      </div>
-        )
-    }
+    //     return (
+    //         <div className="search-input-container">
+    //     <input
+    //       type="search"
+    //       className="search-input"
+    //       placeholder="Search"
+    //       value={searchInput}
+    //       onChange={onChangeSearchInput}
+    //       onKeyDown={onEnterSearchInput}
+    //     />
+    //     <button
+    //       type="button"
+    //       id="searchButton"
+    //       className="search-button-container"
+    //       onClick={getJobs}
+    //     >
+    //       <BsSearch className="search-icon" />
+    //     </button>
+    //   </div>
+    //     )
+    // }
 
     const renderTypeOfEmployment = () => {
-        const {employmentTypesList} = props 
+        const {employmentTypesList, activeCheckBoxList} = props 
+        // const {employmentTypesList} = props
 
         return (
             <div className="employment-type-container">
@@ -52,20 +53,27 @@ const FiltersGroup = props => {
             <ul className="employee-type-list-container">
               {employmentTypesList.map(eachEmployeeType => {
                 const {changeEmployeeList} = props
-                const onSelectEmployeeType = event => {
-                  changeEmployeeList(event.target.value)
+                // const onSelectEmployeeType = event => {
+                //   changeEmployeeList(event.target.value)
+                // }
+
+                const handleCheckBoxChange = (isChecked, employmentTypeId) => {
+                    changeEmployeeList(isChecked, employmentTypeId)
                 }
                 return (
                   <li
                     className="employee-item"
                     key={eachEmployeeType.employmentTypeId}
-                    onChange={onSelectEmployeeType}
+                    // onChange={onSelectEmployeeType}
                   >
                     <input
                       type="checkbox"
+                      checked = {activeCheckBoxList.includes(eachEmployeeType.employmentTypeId)}
                       id={eachEmployeeType.employmentTypeId}
                       className="check-input"
                       value={eachEmployeeType.employmentTypeId}
+                      onChange={e => 
+                        handleCheckBoxChange(e.target.checked, eachEmployeeType.employmentTypeId)}
                     />
                     <label
                       htmlFor={eachEmployeeType.employmentTypeId}
@@ -121,7 +129,7 @@ const FiltersGroup = props => {
 
     return (
         <div className="filter-group-container">
-            {renderSearchInput()}
+            {/* {renderSearchInput()} */}
             <ProfileDetails />
             <hr className="horizontal-line" />
             {renderTypeOfEmployment()}

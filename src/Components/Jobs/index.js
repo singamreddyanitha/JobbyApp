@@ -188,9 +188,21 @@ useEffect(() => {
    setMinimumSalary(salary)
   }
 
- const  changeEmployeeList = type => {
-    setEmployeeType(
-      prev => [...prev, type]);
+ const  changeEmployeeList = (isChecked, employmentTypeId) => {
+  // const changeEmployeeList = type => {
+  //   setEmployeeType(
+  //     prev => [...prev, type]);
+
+    let updatedActiveCheckBoxList 
+
+    if (isChecked) {
+      updatedActiveCheckBoxList = [...employeeType, employmentTypeId]
+    } else {
+      updatedActiveCheckBoxList = employeeType.filter(id => id !== employmentTypeId)
+    }
+
+    setEmployeeType(updatedActiveCheckBoxList)
+    
    
   }
 
@@ -201,12 +213,14 @@ useEffect(() => {
           <div className="jobs-content">
             <FiltersGroup
               employmentTypesList={employmentTypesList}
+              activeCheckBoxList={employeeType}
               salaryRangesList={salaryRangesList}
-              changeSearchInput={changeSearchInput}
-              searchInput={searchInput}
-              getJobs={getJobs}
+              // changeSearchInput={changeSearchInput}
+              // searchInput={searchInput}
+              // getJobs={getJobs}
               changeSalary={changeSalary}
-              changeEmployeeList={changeEmployeeList}
+              changeEmployeeList = {changeEmployeeList}
+              // changeEmployeeList={handleCheckBoxChange}
             />
             <div className="search-input-jobs-list-container">
               <div className="search-input-container-desktop">
@@ -214,6 +228,7 @@ useEffect(() => {
                   type="search"
                   className="search-input-desktop"
                   placeholder="Search"
+                  value = {searchInput}
                   onChange={changeSearchInput}
                   onKeyDown={onEnterSearchInput}
                 />
@@ -236,14 +251,4 @@ useEffect(() => {
 }
 export default Jobs
 
-// import Header from "../Header"
 
-// const Jobs = () => (
-//         <div> 
-//             <Header />
-//             This is a Job page
-//         </div>
-//     )
-
-
-// export default Jobs
